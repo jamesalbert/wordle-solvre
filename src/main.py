@@ -6,7 +6,6 @@ from nltk.corpus import words
 def refine(key):
     global possible_words
     possible_words = list(filter(key, possible_words,))
-    print(f"refined possible words to {len(possible_words)}")
 
 
 # refine the list of words based on the state, misplaced, and incorrect letters
@@ -80,7 +79,7 @@ def main():
 if __name__ == "__main__":
     nltk.download("words")
     round = 1
-    max_rounds = 7
-    max_letters = 7
+    max_rounds = 6
+    max_letters = 5
     possible_words = list(filter(lambda x: len(x) == max_letters, words.words()))
     main()
