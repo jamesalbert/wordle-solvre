@@ -25,7 +25,6 @@ def refine_words(state, given, misplaced, incorrect):
         )
     )
     refine(lambda x: all([letter not in x.lower() for letter in incorrect]))
-    print("a" in possible_words[0])
 
 
 # get input from the user and return it as a list
@@ -81,7 +80,7 @@ def main():
 if __name__ == "__main__":
     nltk.download("words")
     round = 1
-    max_rounds = 100
-    max_letters = 4
+    max_rounds = 7
+    max_letters = 7
     possible_words = list(filter(lambda x: len(x) == max_letters, words.words()))
     main()
