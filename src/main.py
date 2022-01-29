@@ -45,9 +45,7 @@ def diff(li1, li2):
 
 def main():
     global round, max_rounds, max_letters
-    # state keeps track of the correctly placed letters
     state = [str()] * max_letters
-    # misplaced keeps track of the letters that are misplaced
     while round < max_rounds:
         misplaced = []
         print(f"\n=== Round {round}/{max_rounds} ===")
@@ -71,9 +69,6 @@ def main():
             state[given.index(letter)] = letter
         # aggregate all the incorrect letters
         incorrect = diff(diff(given, correct), misplaced)
-        print(f"new state: {state}")
-        print(f"incorrect: {incorrect}")
-        print(f"misplaced: {misplaced}")
         refine_words(state, given, misplaced, incorrect)
         print(f"# possible words: {len(possible_words)}")
         print(f"some words: {possible_words[:15]}")
