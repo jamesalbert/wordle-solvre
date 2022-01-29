@@ -2,6 +2,14 @@ import nltk
 from nltk.corpus import words
 
 
+def sort_by_common_letters(words):
+    letter_freq = dict()
+    for word in words:
+        for letter in word:
+            letter_freq[letter] = letter_freq.get(letter, 0) + 1
+    return sorted(words, key=lambda x: sum([letter_freq[letter] for letter in x]))
+
+
 # standard filtering against specified key
 def refine(key):
     global possible_words
@@ -11,19 +19,17 @@ def refine(key):
 # refine the list of words based on the state, misplaced, and incorrect letters
 def refine_words(state, given, misplaced, incorrect):
     refine(
-        lambda x: all(
-            [not letter or x.lower()[i] == letter for i, letter in enumerate(state)]
-        )
+        lambda x: all([not letter or x[i] == letter for i, letter in enumerate(state)])
     )
     refine(
         lambda x: all(
             [
-                letter in x.lower() and x.lower().index(letter) != given.index(letter)
+                letter in x and x.index(letter) != given.index(letter)
                 for letter in misplaced
             ]
         )
     )
-    refine(lambda x: all([letter not in x.lower() for letter in incorrect]))
+    refine(lambda x: all([letter not in x for letter in incorrect]))
 
 
 # get input from the user and return it as a list
@@ -69,7 +75,7 @@ def main():
         incorrect = diff(diff(given, correct), misplaced)
         refine_words(state, given, misplaced, incorrect)
         print(f"# possible words: {len(possible_words)}")
-        print(f"some words: {possible_words[:15]}")
+        print(f"some words: {sort_by_common_letters(possible_words)[:15]}")
         if not possible_words:
             print("No possible words!")
             break
@@ -81,5 +87,7 @@ if __name__ == "__main__":
     round = 1
     max_rounds = 6
     max_letters = 5
-    possible_words = list(filter(lambda x: len(x) == max_letters, words.words()))
+    possible_words = list(
+        map(lambda x: x.lower(), filter(lambda x: len(x) == max_letters, words.words()))
+    )
     main()
