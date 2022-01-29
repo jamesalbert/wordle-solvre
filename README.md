@@ -1,7 +1,8 @@
 wordle-solvre
 =============
 
-![](https://byob.yarr.is/jamesalbert/wordle-solvre/answer)
+![](https://byob.yarr.is/jamesalbert/wordle-solvre/wordle)
+![](https://byob.yarr.is/jamesalbert/wordle-solvre/sweardle)
 
 ^This badge will be generated from each hourly run of the workflow.
 
