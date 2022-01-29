@@ -37,8 +37,8 @@ jobs:
       - name: Answer badge
         uses: RubbaBoy/BYOB@v1.2.1
         with:
-          NAME: ${{matrix.game}}
+          NAME: ${{ matrix.game }}
           LABEL: "${{ matrix.game }} answer"
           STATUS: ${{ steps.cheat.outputs.answer }}
-          COLOR: 00EEFF
+          COLOR: FF0000
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
